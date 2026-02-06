@@ -1,0 +1,150 @@
+{% extends 'base/base.html' %}
+{% block title %}Privacy Policy{% endblock %}
+
+{% block content %}
+<style>
+.legal-page {
+    max-width: 1100px;
+    margin: 140px auto 80px;
+    padding: 0 20px;
+}
+
+.legal-card {
+    background: rgba(40,45,40,0.9);
+    border-radius: 18px;
+    padding: 40px;
+    border: 1px solid rgba(139,174,102,0.35);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+}
+
+.legal-card h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.legal-card .effective-date {
+    text-align: center;
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+.legal-card h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: var(--accent2);
+}
+
+.legal-card p,
+.legal-card li {
+    opacity: 0.9;
+    line-height: 1.7;
+}
+
+.legal-card ul {
+    padding-left: 18px;
+}
+
+.legal-card a {
+    color: var(--accent2);
+}
+</style>
+
+<div class="legal-page">
+    <div class="legal-card">
+
+        <h1>ZARO – Privacy Policy</h1>
+        <p class="effective-date">
+            Effective Date: <strong>22 December 2025</strong>
+        </p>
+
+        <p>
+            ZARO is committed to protecting your privacy and personal information.
+            This Privacy Policy explains what data we collect, how we use it, and
+            the rights you have regarding your personal information.
+        </p>
+
+        <!-- 1 -->
+        <h3>1. Data We Collect</h3>
+        <ul>
+            <li><strong>Personal Information:</strong> Name, email address, and phone number (optional)</li>
+            <li><strong>Payment Information:</strong> Processed securely via Razorpay; ZARO does not store card or banking details</li>
+            <li><strong>Other Data:</strong> Cookies, tracking pixels, and analytics data for performance and marketing</li>
+        </ul>
+
+        <!-- 2 -->
+        <h3>2. How We Use Your Data</h3>
+        <ul>
+            <li>To create and manage user accounts</li>
+            <li>To provide access to purchased digital products</li>
+            <li>To process payments securely via third-party gateways</li>
+            <li>To send updates, newsletters, and promotions via email or WhatsApp</li>
+            <li>To analyze website traffic and improve user experience</li>
+        </ul>
+
+        <!-- 3 -->
+        <h3>3. Marketing & Communications</h3>
+        <ul>
+            <li>Users may opt out of marketing communications at any time</li>
+            <li>Promotional messages are sent only to users who opt in</li>
+            <li>Email tools may include platforms such as Mailchimp or Brevo</li>
+        </ul>
+
+        <!-- 4 -->
+        <h3>4. Cookies & Tracking</h3>
+        <p>ZARO uses cookies and tracking technologies for:</p>
+        <ul>
+            <li>Analytics and performance monitoring</li>
+            <li>Improving website functionality</li>
+            <li>Personalized content and advertising</li>
+        </ul>
+        <p>
+            Users can disable cookies via browser settings; however, some features
+            of the website may not function properly.
+        </p>
+
+        <!-- 5 -->
+        <h3>5. Data Security</h3>
+        <ul>
+            <li>ZARO uses industry-standard security measures to protect user data</li>
+            <li>Payment transactions are handled only by trusted third-party gateways</li>
+            <li>We do not store sensitive financial information on our servers</li>
+        </ul>
+
+        <!-- 6 -->
+        <h3>6. Data Sharing</h3>
+        <p>ZARO does not sell or rent personal information to third parties.</p>
+        <p>We may share data only with:</p>
+        <ul>
+            <li>Payment processors (Razorpay, Stripe, PayPal)</li>
+            <li>Marketing platforms (Mailchimp, Brevo)</li>
+            <li>Legal or government authorities if required by law</li>
+        </ul>
+
+        <!-- 7 -->
+        <h3>7. User Rights</h3>
+        <p>Users have the right to:</p>
+        <ul>
+            <li>Access their personal data</li>
+            <li>Request correction of inaccurate information</li>
+            <li>Request deletion of their account and personal data</li>
+        </ul>
+        <p>
+            Requests can be sent to:
+            <a href="mailto:zarogroups@gmail.com">zarogroups@gmail.com</a>
+        </p>
+
+        <!-- 8 -->
+        <h3>8. Changes to Privacy Policy</h3>
+        <p>
+            ZARO may update this Privacy Policy at any time.
+            Significant changes will be communicated via email or website notice.
+        </p>
+
+        <p class="mt-4 text-center opacity-75">
+            © 2025 ZARO. All rights reserved.
+        </p>
+
+    </div>
+</div>
+{% endblock %}

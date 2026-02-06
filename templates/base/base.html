@@ -1,0 +1,778 @@
+  {% load static %}
+  <!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zaro - {% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/zaro_logo1.png' %}" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+/* ============================================================
+   ROOT VARIABLES & GLOBAL
+============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #1B211A;
+    --accent: #628141;
+    --accent2: #8BAE66;
+    --light: #EBD5AB;
+    color-scheme: dark;
+}
+
+body.dark-theme {
+    background: var(--bg);
+    color: var(--light);
+}
+
+a {
+    text-decoration: none !important;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5,p{
+  color: var(--light);
+}
+
+.section-container { 
+    padding-left: 5%; 
+    padding-right: 5%; 
+    width: 100%; 
+    max-width: 100%; 
+    margin: 4% auto; 
+}
+.section-container * {
+    box-sizing: border-box;
+}
+.section-inner {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ============================================================
+   NAVBAR
+============================================================ */
+.navbar-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    pointer-events: auto;
+    background-color: transparent;
+    transition: all 0.35s ease-in-out;
+    padding-top: 10px;
+    z-index: 9999;
+}
+
+.navbar-wrapper.scrolled {
+    background-color: var(--accent);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+    border-radius: 45px;
+    padding: 10px 45px;
+}
+
+/* Default */
+#mainNav {
+    background-color: rgba(0,0,0,0.2) !important;
+    transition: all 0.35s ease-in-out;
+    padding: 15px 30px;
+    z-index: 9999;
+    border-radius: 45px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+}
+
+/* Scrolled */
+#mainNav.scrolled {
+    background-color: var(--accent) !important;
+    padding: 10px 45px;
+}
+
+#mainNav.scrolled .nav-link,
+#mainNav.scrolled .navbar-brand,
+#mainNav.scrolled .btn-outline-light {
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+.nav-link{
+  color: white;
+}
+
+.nav-link:hover{
+  color: var(--light) !important;
+}
+
+#mainNav.scrolled .nav-link:hover {
+    color: var(--light) !important;
+}
+/* Dropdown background matches navbar */
+.navbar .dropdown-menu {
+    background-color: transparent; /* default transparent */
+    border: none;
+    transition: background-color 0.35s ease-in-out;
+}
+
+/* When navbar is scrolled, dropdown background matches navbar */
+.navbar.scrolled .dropdown-menu {
+    background-color: var(--accent);
+    border-radius: 10px;
+}
+
+/* Dropdown links styling */
+.navbar .dropdown-menu .nav-link {  
+    color: var(--accent);
+}
+
+.navbar .dropdown-menu .nav-link:hover {
+    color: var(--bg);
+}
+
+hr{
+  color: var(--light);
+} 
+/* ============================================================
+   Make dropdown-item look like nav-link
+============================================================ */
+
+/* Base dropdown item */
+.navbar .dropdown-menu .dropdown-item {
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    background-color: transparent;
+}
+
+/* Hover effect (same as nav-link hover) */
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item:focus {
+    color: var(--light);
+    background-color: transparent;
+}
+
+/* When navbar is scrolled */
+#mainNav.scrolled .dropdown-menu .dropdown-item {
+    color: #fff;
+}
+
+#mainNav.scrolled .dropdown-menu .dropdown-item:hover {
+    color: var(--light);
+}
+
+/* Mobile view spacing consistency */
+@media (max-width: 991px) {
+    .navbar .dropdown-menu .dropdown-item {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 991px) {
+    .dropdown-menu {
+        position: static !important;
+        float: none;
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   BUTTON STYLE (GLOBAL)
+============================================================ */
+.button {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.35);
+    padding-block: 0.55rem;
+    padding-inline: 1.6rem;
+    background-color: var(--accent);
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    gap: 10px;
+    font-weight: 600;
+    border: 2px solid var(--light);
+    outline: none;
+    overflow: hidden;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.button:hover {
+    transform: scale(1.08);
+    background-color: var(--accent2);
+    border-color: #fff;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.button:hover .icon {
+    transform: translateX(4px);
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    background-image: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0) 70%
+    );
+    top: 0;
+    left: -150px;
+    opacity: 0.5;
+}
+
+.button:hover::before {
+    animation: shine 1.3s ease-out;
+}
+
+@keyframes shine {
+    0% { left: -140px; }
+    75% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* ============================================================
+   HERO SECTION — WELCOME
+============================================================ */
+#welcome {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/static/img/back.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcome .overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1;
+}
+
+#welcome .welcome-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#welcome .welcome-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#welcome .welcome-content.fade-out {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#welcome h1 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+#welcome p {
+    font-size: 1.5rem;
+}
+
+/* ============================================================
+   INTRO SECTION
+============================================================ */
+#introduction {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.intro-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.intro-text {
+    padding-top: 40px;
+    flex: 1 1 45%;
+}
+
+.intro-image {
+    flex: 1 1 45%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.intro-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .intro-flex { flex-direction: column; text-align: center; }
+    .intro-image { justify-content: center; }
+}
+/* ============================================================
+   FOUNDER
+============================================================ */
+
+.founder-box {
+    background-color: var(--bg);
+    border: 3px solid var(--accent2);
+    color: var(--light);
+    border-radius: 14px;
+    transition: 0.3s ease;
+    padding: 30px;
+    margin: 20px 0;
+}
+
+.founder-img {
+    width: 160px;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 60px 12px 60px 12px;
+    border: 4px solid var(--accent2);
+    background-color: #000;
+    margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+    #founders .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #founders .col-md-3,
+    #founders .col-md-9 {
+        width: 100%;
+    }
+
+    .founder-img {
+        margin-bottom: 15px;
+    }
+}
+
+/* ============================================================
+   Equal Height Cards for Services & Courses
+============================================================ */
+
+.row.g-4 > .col-md-4 {
+    display: flex;
+}
+
+.row.g-4 > .col-md-4 .service-card,
+.row.g-4 > .col-md-4 .course-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.row.g-4 > .col-md-4 .service-card .card-body,
+.row.g-4 > .col-md-4 .course-card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.course-card img {
+    flex-shrink: 0; 
+    width: 100%;
+    height: auto;  
+}
+
+/* ============================================================
+   SERVICES
+============================================================ */
+#services {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.service-card {
+    background-color: var(--bg);
+    border: 3px solid var(--accent2);
+    color: var(--light);
+    border-radius: 14px;
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 15px rgba(139, 174, 102, 0.25);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.service-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-icon i {
+    font-size: 34px;
+    color: var(--accent2);
+}
+
+/* ============================================================
+   COURSES
+============================================================ */
+.course-card {
+    background-color: var(--bg);
+    border: 3px solid var(--accent2);
+    border-radius: 14px;
+    box-shadow: 0px 5px 15px rgba(139, 174, 102, 0.25);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.course-card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.course-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+/* ============================================================
+   ABOUT SECTION — FIXED BACKGROUND
+============================================================ */
+#about {
+    width: 100vw;
+    min-height: 60vh;
+    background-image: url('/static/img/img2.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+#about .overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1;
+}
+
+#about .content-box {
+    position: relative;
+    z-index: 2;
+    width: 75%;
+    max-width: 900px;
+    padding: 40px 50px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 18px;
+    text-align: center;
+    color: white;
+    box-shadow: 0px 8px 30px rgba(0,0,0,0.3);
+    animation: floatUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes floatUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    #about .content-box {
+        width: 90%;
+        padding: 30px;
+    }
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer { 
+  padding:0; 
+  color: var(--light); 
+  margin-top: 0;
+  max-width: 100%;  
+  padding-left: 20px;
+}
+.footer-left{
+    margin-right:auto;
+}
+
+.footer-section {
+    background: #0f140f;
+    padding: 70px 0 40px;
+}
+
+.footer-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent2);
+}
+.footer-title {
+    font-weight: 700;
+    color: var(--accent2);
+}
+.footer-desc {
+    max-width: 400px;
+    opacity: 0.85;
+}
+
+
+footer a {
+    display: block;
+    color: var(--light);
+    margin-bottom: 8px;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--accent2);
+}
+
+.contact-card {
+    background: rgba(255,255,255,0.08);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    max-width: 380px;
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.social-icons a {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: var(--light);
+}
+
+.social-icons a:hover { color: var(--accent2); }
+
+    </style>
+  </head>
+  <body class="dark-theme">
+<!-- ==========================================================
+     NAVBAR
+     ========================================================== -->
+  <div class="fixed-top navbar-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-dark mx-auto" id="mainNav">
+      <div class="container px-4 d-flex">
+        <a class="navbar-brand fw-bold fs-4" href="/">ZARO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+          <ul class="navbar-nav align-items-center me-3">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="/#courses">Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="/#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'core:contact' %}">Contact</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                    User
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    {% if user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'users:dashboard' %}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a class="dropdown-item" href="{% url 'users:login' %}">Login / Register</a></li>
+                    {% endif %}
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/admin">Admin</a></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+<!-- ==========================================================
+     CONTENT 
+     ========================================================== -->
+  <div class="container" style="margin: 0; padding: 0;max-width: 100%;">
+    {% block content %}{% endblock %}
+  </div>
+<!-- ==========================================================
+     FOOTER 
+     ========================================================== -->
+  <footer class="footer-section" id="contact">
+      <div class="container">
+          <div class="row ">
+              <div class="col-md-3">
+                  <h3 class="footer-logo">ZARO</h3>
+                  <p class="footer-desc">
+                      India’s fastest-growing digital brand empowering young achievers.
+                  </p>
+                  <h5 class="footer-head">Follow Us</h5>
+                  <div class="social-icons" style="display: flex;">
+                      <a href="https://www.instagram.com/zaro_777_?igsh=MWFnMnEzanJnN2hjNQ=="><i class="bi bi-instagram"></i></a>
+                      <a href="https://wa.me/919092510906"><i class="bi bi-whatsapp"></i></a>
+                      <a href="https://www.linkedin.com/in/tamil-selvi-tamil-selvi-764130339/"><i class="bi bi-linkedin"></i></a>
+                  </div>
+              </div>
+              <div class="col-md-3">
+                <h5 class="footer-title">Quick Links</h5>
+                <a href="/">Home</a>
+                <a href="/#services">Services</a>
+                <a href="/#courses">Courses</a>
+                <a href="/#about">About</a>
+                </div>
+
+                <div class="col-md-3">
+                <h5 class="footer-title">Contact Info</h5>
+                <a href="{% url 'core:contact' %}">Contact Us</a>
+                <p>Email: zaro.eduction@gmail.com</p>
+                <!-- <p>Phone: +91 00000 00000</p> -->
+                <p>Location: Thoothukudi</p>
+                </div>
+
+                <div class="col-md-3">
+                <h5 class="footer-title">Policies</h5>
+                <a href="{% url 'core:privacy_policy' %}">Privacy Policy</a>
+                <a href="{% url 'core:terms_conditions' %}">Terms & Conditions</a>
+                </div>
+            </div>
+          <hr>
+          <p class="text-center footer-copy mt-4">© 2025 ZARO. All rights reserved.</p>
+      </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/site.js"></script>
+  {% block scripts %}{% endblock %}
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const nav = document.getElementById("mainNav");
+      function updateNav() {
+          if (window.scrollY > 60) {
+              nav.classList.add("scrolled");
+          } else {
+              nav.classList.remove("scrolled");
+          }
+      }
+      setTimeout(updateNav, 50); 
+      window.addEventListener("scroll", updateNav);
+  });
+    document.addEventListener("DOMContentLoaded", function () {
+        const navMenu = document.getElementById("navMenu");
+
+        navMenu.addEventListener("click", function (e) {
+            const link = e.target.closest("a");
+            if (!link) return;
+
+            // ❌ Do NOT close navbar for dropdown toggle
+            if (link.classList.contains("dropdown-toggle")) {
+                e.preventDefault();
+                return;
+            }
+
+            // ✅ Close navbar ONLY for normal links
+            if (window.innerWidth < 992) {
+                const bsCollapse =
+                    bootstrap.Collapse.getInstance(navMenu) ||
+                    new bootstrap.Collapse(navMenu, { toggle: false });
+
+                bsCollapse.hide();
+            }
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        const navMenu = document.getElementById("navMenu");
+        const nav = document.getElementById("mainNav");
+
+        function isMobile() {
+            return window.innerWidth < 992;
+        }
+
+        function closeNavbar() {
+            const instance = bootstrap.Collapse.getInstance(navMenu);
+            if (instance) instance.hide();
+        }
+
+        /* =====================================
+        1. CLOSE ON SCROLL
+        ===================================== */
+        let lastScroll = window.scrollY;
+
+        window.addEventListener("scroll", () => {
+            if (!isMobile()) return;
+
+            const currentScroll = window.scrollY;
+
+            if (
+                currentScroll > lastScroll &&
+                navMenu.classList.contains("show")
+            ) {
+                closeNavbar();
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        /* =====================================
+        2. CLOSE ON CLICK OUTSIDE
+        ===================================== */
+        document.addEventListener("click", (e) => {
+            if (!isMobile()) return;
+
+            if (
+                navMenu.classList.contains("show") &&
+                !nav.contains(e.target)
+            ) {
+                closeNavbar();
+            }
+        });
+    });
+  </script>
+  </body>
+  </html>
